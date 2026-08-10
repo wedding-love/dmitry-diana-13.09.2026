@@ -84,7 +84,7 @@
     }
     .names {
       position: absolute;
-      bottom: 12%;  /* опустили ещё ниже */
+      bottom: 12%;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -459,7 +459,7 @@
     /* ===== ТАЙМЕР ===== */
     .wedding-block {
       position: relative;
-      height: 92vh;          /* сделали выше */
+      height: 92vh;
       min-height: 550px;
       background: url('photo_2026-08-07_17-28-00%20-%20Полина.jpg') center/cover no-repeat;
       color: white;
@@ -490,6 +490,7 @@
       font-size: clamp(36px, 7vw, 52px);
       letter-spacing: 2px;
       font-weight: 400;
+      white-space: nowrap;
     }
     .wedding-block .timer {
       width: 100%;
@@ -506,7 +507,7 @@
       padding: 0;
     }
     .wedding-block .timer span {
-      font-size: 64px;       /* увеличенный размер */
+      font-size: 64px;
       font-weight: 400;
       display: block;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
@@ -753,13 +754,14 @@
       color: #ffffff;
     }
 
+    /* ===== МЕДИА-ЗАПРОСЫ С УМЕНЬШЕННЫМИ ШРИФТАМИ ===== */
     @media (max-width: 680px) {
       .frame img { width: 100%; height: auto; max-width: 400px; }
       .slide img { height: 300px; }
       .wedding-block .timer span { font-size: 48px; }
       .wedding-block .timer { gap: 20px; }
       .polaroid-card img { width: 130px; height: 130px; }
-      .contacts-block h2 { font-size: 38px; }
+      .contacts-block h2 { font-size: 32px; }
       .names-sign { font-size: 34px; }
       .invite { font-size: 22px; }
       .dresscode-section, .details-section { padding: 25px 15px; }
@@ -767,8 +769,18 @@
       .time { font-size: 26px; }
       .timing .title { font-size: 18px; }
       .text-block { font-size: 17px; }
-      .rsvp h2 { font-size: 38px; }
+      .rsvp h2 { font-size: 32px; }
+      .location h2, .timing h2 { font-size: 32px; }
+      .dresscode-section h2, .details-section h2 { font-size: 30px; }
+      .invite-block h2 { font-size: 28px; }
+      .wedding-block h1 { font-size: 26px; white-space: nowrap; }
+      .month { font-size: 24px; }
+      .calendar-date { font-size: 24px; }
+      .sub { font-size: 24px; }
+      .subtitle { font-size: 22px; }
+      .music-text { font-size: 16px; }
     }
+
     @media (max-width: 480px) {
       .frame img { max-width: 300px; }
       .wedding-block .timer span { font-size: 36px; }
@@ -778,7 +790,19 @@
       .heart-number { width: 34px; height: 34px; }
       .heart-number i { font-size: 34px; }
       .heart-number span { font-size: 16px; }
-      .names { font-size: 40px; bottom: 15%; }
+      .names { font-size: 36px; bottom: 15%; }
+      .date { font-size: 30px; }
+      .location h2, .timing h2, .rsvp h2, .contacts-block h2 { font-size: 26px; }
+      .dresscode-section h2, .details-section h2 { font-size: 24px; }
+      .invite-block h2 { font-size: 24px; }
+      .wedding-block h1 { font-size: 20px; }
+      .names-sign { font-size: 28px; }
+      .invite { font-size: 18px; }
+      .month { font-size: 20px; }
+      .calendar-date { font-size: 20px; }
+      .sub { font-size: 20px; }
+      .subtitle { font-size: 18px; }
+      .music-text { font-size: 14px; }
     }
   </style>
 </head>
@@ -824,9 +848,7 @@
   <div class="month fade-in-scroll">— СЕНТЯБРЬ 2026 —</div>
   <div class="weekdays fade-in-scroll"><span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span>СБ</span><span>ВС</span></div>
   <div class="days fade-in-scroll">
-    <!-- 1 сентября - вторник, значит первый ряд: пусто, 1,2,3,4,5,6 -->
     <span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
-    <!-- второй ряд: 7,8,9,10,11,12,13 (сердечко) -->
     <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
     <span>
       <div class="heart-number">
@@ -834,11 +856,8 @@
         <span>13</span>
       </div>
     </span>
-    <!-- третий ряд: 14-20 -->
     <span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span>
-    <!-- четвертый ряд: 21-27 -->
     <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span>
-    <!-- пятый ряд: 28,29,30 и пустые до конца недели (воскресенье) -->
     <span>28</span><span>29</span><span>30</span><span></span><span></span><span></span><span></span>
   </div>
   <div class="calendar-date fade-in-scroll">13.09.2026</div>
