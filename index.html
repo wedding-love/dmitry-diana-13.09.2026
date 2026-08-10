@@ -17,7 +17,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <style>
-    /* Все стили из первого примера остаются без изменений, кроме добавления .toast */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -355,7 +354,23 @@
       max-width: 340px;
       margin: auto;
     }
-    .icon { font-size: 44px; margin-bottom: 10px; color: #fff; }
+    .icon {
+      font-size: 44px;
+      margin-bottom: 10px;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .icon svg {
+      width: 44px;
+      height: 44px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
     .time { font-size: 30px; font-weight: 400; margin-bottom: 6px; }
     .timing .title { font-size: 20px; font-weight: 500; }
 
@@ -678,9 +693,29 @@
       color: #b7a99a;
     }
 
-    /* ---- СТАРЫЙ .success-message (заменён на тост) ---- */
-    .success-message {
+    /* ---- НОВОЕ СООБЩЕНИЕ ПОД КНОПКОЙ (бежевое) ---- */
+    .form-message {
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: #f5f0e8;
+      color: #3d2c1b;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 400;
+      text-align: center;
       display: none;
+      border: 1px solid #d4c5b2;
+      width: 100%;
+      max-width: 340px;
+      box-sizing: border-box;
+    }
+    .form-message.show {
+      display: block;
+    }
+    .form-message.error {
+      background: #fce4e0;
+      color: #7a2e1a;
+      border-color: #dbb0a8;
     }
 
     /* ===== КОНТАКТЫ ===== */
@@ -773,6 +808,7 @@
       .sub { font-size: 24px; }
       .subtitle { font-size: 22px; }
       .music-text { font-size: 16px; }
+      .form-message { font-size: 15px; padding: 12px 16px; }
     }
 
     @media (max-width: 480px) {
@@ -796,40 +832,8 @@
       .sub { font-size: 20px; }
       .subtitle { font-size: 18px; }
       .music-text { font-size: 14px; }
+      .form-message { font-size: 14px; padding: 10px 14px; }
     }
-
-    /* ===== ТОСТ (всплывающее уведомление) — центрирован по экрану, без смайлов ===== */
-    .toast {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.9);
-      background: rgba(0,0,0,0.88);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #fff;
-      padding: 20px 32px;
-      border-radius: 16px;
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(18px, 3.5vw, 24px);
-      font-weight: 400;
-      letter-spacing: 0.5px;
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
-      text-align: center;
-      max-width: 90%;
-      border: 1px solid rgba(255,255,255,0.12);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-      pointer-events: auto;
-    }
-    .toast.success { border-left: 5px solid #34c759; }
-    .toast.error { border-left: 5px solid #ff3b30; }
   </style>
 </head>
 <body>
@@ -901,8 +905,8 @@
   </div>
   <a href="https://www.google.com/maps/place/%D0%9A%D0%B0%D0%BC%D1%8B%D1%88%D0%BE%D0%B2%D0%BE%D0%B5+%D1%88.,+34,+%D0%A1%D0%B5%D0%B2%D0%B0%D1%81%D1%82%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C/@44.5640233,33.4723518,17z/data=!3m1!4b1!4m10!1m2!2m1!1z0LPQsNGB0YLRgNC-0L3QvtC80LjQutCwINC60LDQvNGL0YjQvtCy0L7QtSDRiNC-0YHRgdC1LCAzNCA!3m6!1s0x40952323f217727b:0x2f9097761eb79c9f!8m2!3d44.5640233!4d33.4749267!15sCjrQs9Cw0YHRgtGA0L7QvdC-0LzQuNC60LAg0LrQsNC80YvRiNC-0LLQvtC1INGI0L7RgdGB0LUsIDM0kgEQZ2VvY29kZWRfYWRkcmVzc-ABAA!16s%2Fg%2F11fncshmsz?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn-location fade-in-scroll">ПОКАЗАТЬ НА КАРТЕ</a>
   <div class="photos-loc">
-    <div class="polaroid-card p1-wrap fade-in-scroll"><img src="0B9A5693.jpg" alt="Локация 1"></div>
-    <div class="polaroid-card p2-wrap fade-in-scroll"><img src="0B9A5568.jpg" alt="Локация 2"></div>
+    <div class="polaroid-card p1-wrap fade-in-scroll"><img src="IMG_7980.JPG" alt="Локация 1"></div>
+    <div class="polaroid-card p2-wrap fade-in-scroll"><img src="IMG_7981.PNG" alt="Локация 2"></div>
   </div>
 </section>
 
@@ -912,22 +916,30 @@
   <div class="sub fade-in-scroll">Timing</div>
   <div class="timeline">
     <div class="item fade-in-scroll">
-      <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
       <div class="time">14:00</div>
       <div class="title">Сбор гостей</div>
     </div>
     <div class="item fade-in-scroll">
-      <div class="icon"><i class="fas fa-ring"></i></div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4"/></svg>
+      </div>
       <div class="time">15:00</div>
       <div class="title">Церемония</div>
     </div>
     <div class="item fade-in-scroll">
-      <div class="icon"><i class="fas fa-utensils"></i></div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h12M4 17h8"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg>
+      </div>
       <div class="time">16:00</div>
       <div class="title">Банкет</div>
     </div>
     <div class="item fade-in-scroll">
-      <div class="icon"><i class="fas fa-music"></i></div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </div>
       <div class="time">21:00</div>
       <div class="title">Финал</div>
     </div>
@@ -979,22 +991,10 @@
   <div class="content">
     <h1 class="fade-in-scroll">ДО НАШЕЙ СВАДЬБЫ</h1>
     <div class="timer">
-      <div>
-        <span id="weddingDays">0</span>
-        <small id="daysLabel">дней</small>
-      </div>
-      <div>
-        <span id="weddingHours">0</span>
-        <small id="hoursLabel">часов</small>
-      </div>
-      <div>
-        <span id="weddingMinutes">0</span>
-        <small id="minutesLabel">минут</small>
-      </div>
-      <div>
-        <span id="weddingSeconds">0</span>
-        <small id="secondsLabel">секунд</small>
-      </div>
+      <div><span id="weddingDays">0</span><small id="daysLabel">дней</small></div>
+      <div><span id="weddingHours">0</span><small id="hoursLabel">часов</small></div>
+      <div><span id="weddingMinutes">0</span><small id="minutesLabel">минут</small></div>
+      <div><span id="weddingSeconds">0</span><small id="secondsLabel">секунд</small></div>
     </div>
   </div>
 </section>
@@ -1022,31 +1022,17 @@
 
       <label>Предпочтения по алкоголю (можно выбрать несколько)</label>
       <div class="checkbox-group">
-        <label class="custom-checkbox">
-          <input type="checkbox" name="alcohol[]" value="Шампанское">
-          <span class="checkmark"></span> Шампанское
-        </label>
-        <label class="custom-checkbox">
-          <input type="checkbox" name="alcohol[]" value="Вино">
-          <span class="checkmark"></span> Вино
-        </label>
-        <label class="custom-checkbox">
-          <input type="checkbox" name="alcohol[]" value="Водка">
-          <span class="checkmark"></span> Водка
-        </label>
-        <label class="custom-checkbox">
-          <input type="checkbox" name="alcohol[]" value="Виски">
-          <span class="checkmark"></span> Виски
-        </label>
-        <label class="custom-checkbox">
-          <input type="checkbox" name="alcohol[]" value="Безалкогольное">
-          <span class="checkmark"></span> Безалкогольное
-        </label>
+        <label class="custom-checkbox"><input type="checkbox" name="alcohol[]" value="Шампанское"><span class="checkmark"></span> Шампанское</label>
+        <label class="custom-checkbox"><input type="checkbox" name="alcohol[]" value="Вино"><span class="checkmark"></span> Вино</label>
+        <label class="custom-checkbox"><input type="checkbox" name="alcohol[]" value="Водка"><span class="checkmark"></span> Водка</label>
+        <label class="custom-checkbox"><input type="checkbox" name="alcohol[]" value="Виски"><span class="checkmark"></span> Виски</label>
+        <label class="custom-checkbox"><input type="checkbox" name="alcohol[]" value="Безалкогольное"><span class="checkmark"></span> Безалкогольное</label>
       </div>
 
       <button type="submit" id="submitBtn">Отправить</button>
+      <!-- НОВОЕ СООБЩЕНИЕ ПОД КНОПКОЙ -->
+      <div id="formMessage" class="form-message"></div>
     </form>
-    <div id="successMessage" class="success-message"></div>
   </div>
 </section>
 
@@ -1078,7 +1064,7 @@
   updateButtonIcon();
   audio.addEventListener('ended', () => { if (audio.loop) audio.play(); });
 
-  // ===== ФУНКЦИЯ СКЛОНЕНИЯ =====
+  // ===== СКЛОНЕНИЕ =====
   function declension(number, one, two, five) {
     const n = Math.abs(number) % 100;
     const n1 = n % 10;
@@ -1160,11 +1146,7 @@
   createDots();
 
   // ===== АНИМАЦИЯ ПРИ ПРОКРУТКЕ =====
-  const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -30px 0px'
-  };
-
+  const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -30px 0px' };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1173,39 +1155,13 @@
       }
     });
   }, observerOptions);
+  document.querySelectorAll('.fade-in-scroll').forEach(el => observer.observe(el));
 
-  document.querySelectorAll('.fade-in-scroll').forEach(el => {
-    observer.observe(el);
-  });
-
-  // ============================================================
-  // ********** ОТПРАВКА ФОРМЫ (скопирована из второго примера) **********
-  // ============================================================
-
-  // --- Вспомогательная функция показа тоста (центрирован, без смайлов) ---
-  function showToast(message, type = 'success') {
-    const oldToast = document.querySelector('.toast');
-    if (oldToast) oldToast.remove();
-
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    toast.textContent = message;
-    document.body.appendChild(toast);
-
-    requestAnimationFrame(() => {
-      toast.classList.add('show');
-    });
-
-    setTimeout(() => {
-      toast.classList.remove('show');
-      setTimeout(() => toast.remove(), 500);
-    }, 4000);
-  }
-
-  // --- Обработчик отправки формы ---
+  // ===== ОТПРАВКА ФОРМЫ (НОВОЕ СООБЩЕНИЕ БЕЗ ТОСТА) =====
   const rsvpForm = document.getElementById('rsvpForm');
+  const formMessage = document.getElementById('formMessage');
   const submitBtn = document.getElementById('submitBtn');
-  const FORM_ENDPOINT = 'https://formspree.io/f/xqpzpkge'; // используем тот же endpoint, что во втором примере
+  const FORM_ENDPOINT = 'https://formspree.io/f/xqpzpkge';
 
   rsvpForm.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -1214,47 +1170,48 @@
     const name = nameInput ? nameInput.value.trim() : '';
 
     if (name === '') {
-      showToast('Пожалуйста, укажите ваше имя и фамилию.', 'error');
+      formMessage.className = 'form-message show error';
+      formMessage.textContent = 'Пожалуйста, укажите ваше имя и фамилию.';
       nameInput.focus();
       return;
     }
 
-    // Присутствие
+    // Собираем данные
     const attendanceRadios = document.querySelectorAll('input[name="attend"]');
     let attendance = '';
     for (let radio of attendanceRadios) {
-      if (radio.checked) {
-        attendance = radio.value;
-        break;
-      }
+      if (radio.checked) { attendance = radio.value; break; }
     }
     const attendanceLabel = attendance || 'Не указано';
 
-    // Алкоголь (массив)
     const alcoholCheckboxes = document.querySelectorAll('input[name="alcohol[]"]:checked');
     const alcoholValues = Array.from(alcoholCheckboxes).map(cb => cb.value);
     const alcoholString = alcoholValues.length ? alcoholValues.join(', ') : 'Не выбрано';
 
-    // Собираем данные в FormData
     const formData = new FormData();
     formData.append('name', name);
     formData.append('attendance', attendanceLabel);
     formData.append('alcohol', alcoholString);
 
-    // Отправка с mode: 'no-cors' (обходит CORS)
+    // Отправка
     fetch(FORM_ENDPOINT, {
       method: 'POST',
       body: formData,
       mode: 'no-cors'
     })
     .then(() => {
-      showToast('Ваша анкета успешно отправлена.', 'success');
-      // Очистка полей
+      // Успех – показываем бежевое сообщение под кнопкой
+      formMessage.className = 'form-message show';
+      formMessage.textContent = 'Спасибо! Ваш ответ отправлен.';
       rsvpForm.reset();
-      // Сброс всех чекбоксов и радио (reset уже сделал, но дополнительно можно)
+      // Скрываем через 5 секунд
+      setTimeout(() => {
+        formMessage.classList.remove('show');
+      }, 5000);
     })
     .catch(() => {
-      showToast('Ошибка сети. Проверьте подключение.', 'error');
+      formMessage.className = 'form-message show error';
+      formMessage.textContent = 'Ошибка сети. Проверьте подключение.';
     });
   });
 </script>
