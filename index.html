@@ -332,7 +332,7 @@
     .p1-wrap { --rot: -8deg; position: relative; top: -10px; }
     .p2-wrap { --rot: 8deg; position: relative; top: 15px; }
 
-    /* ===== ТАЙМИНГ ===== */
+    /* ===== ТАЙМИНГ (иконки SVG) ===== */
     .timing {
       background: #b7a99a;
       color: #fff;
@@ -355,9 +355,19 @@
       margin: auto;
     }
     .icon {
-      font-size: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin-bottom: 10px;
-      color: #fff;
+    }
+    .icon svg {
+      width: 44px;
+      height: 44px;
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
     .time { font-size: 30px; font-weight: 400; margin-bottom: 6px; }
     .timing .title { font-size: 20px; font-weight: 500; }
@@ -681,7 +691,7 @@
       color: #b7a99a;
     }
 
-    /* ---- НОВОЕ СООБЩЕНИЕ ПОД КНОПКОЙ (бежевое) ---- */
+    /* ---- СООБЩЕНИЕ ПОД КНОПКОЙ (бежевое) ---- */
     .form-message {
       margin-top: 20px;
       padding: 14px 18px;
@@ -898,31 +908,70 @@
   </div>
 </section>
 
-<!-- ===== ТАЙМИНГ (иконки Font Awesome) ===== -->
+<!-- ===== ТАЙМИНГ (иконки SVG) ===== -->
 <section class="timing">
   <h2 class="fade-in-scroll">ТАЙМИНГ ДНЯ</h2>
   <div class="sub fade-in-scroll">Timing</div>
   <div class="timeline">
+
+    <!-- 1. Сбор гостей – иконка "map-point" -->
     <div class="item fade-in-scroll">
-      <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="10" r="3" />
+          <path d="M12 21.7C17.3 16.4 21 12.4 21 10c0-5-4-9-9-9s-9 4-9 9c0 2.4 3.7 6.4 9 11.7z" />
+        </svg>
+      </div>
       <div class="time">14:00</div>
       <div class="title">Сбор гостей</div>
     </div>
+
+    <!-- 2. Церемония – иконка "кольца" -->
     <div class="item fade-in-scroll">
-      <div class="icon"><i class="fas fa-ring"></i></div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <circle cx="8" cy="14" r="4" />
+          <circle cx="16" cy="14" r="4" />
+          <path d="M12 18c-1.5 0-3-1-3-3 0-1.5 1-3 3-3s3 1.5 3 3c0 2-1.5 3-3 3z" />
+          <path d="M8 10c0-2.2 1.8-4 4-4s4 1.8 4 4" />
+        </svg>
+      </div>
       <div class="time">15:00</div>
       <div class="title">Церемония</div>
     </div>
+
+    <!-- 3. Банкет – иконка "ресторан" -->
     <div class="item fade-in-scroll">
-      <div class="icon"><i class="fas fa-utensils"></i></div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 8h16M4 15h16M4 22h16" />
+          <rect x="2" y="3" width="20" height="3" rx="1" />
+          <circle cx="8" cy="12" r="1.5" />
+          <circle cx="16" cy="12" r="1.5" />
+          <circle cx="8" cy="19" r="1.5" />
+          <circle cx="16" cy="19" r="1.5" />
+        </svg>
+      </div>
       <div class="time">16:00</div>
       <div class="title">Банкет</div>
     </div>
+
+    <!-- 4. Финал – иконка "торт" -->
     <div class="item fade-in-scroll">
-      <div class="icon"><i class="fas fa-music"></i></div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 4c-1.5 0-3 1.5-3 3s1.5 3 3 3 3-1.5 3-3-1.5-3-3-3z" />
+          <path d="M7 10l5-3 5 3v10H7V10z" />
+          <path d="M5 20h14" />
+          <path d="M8 20l1-4" />
+          <path d="M16 20l-1-4" />
+          <path d="M10 16h4" />
+        </svg>
+      </div>
       <div class="time">21:00</div>
       <div class="title">Финал</div>
     </div>
+
   </div>
 </section>
 
