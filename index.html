@@ -358,18 +358,6 @@
       font-size: 44px;
       margin-bottom: 10px;
       color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .icon svg {
-      width: 44px;
-      height: 44px;
-      fill: none;
-      stroke: #fff;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
     }
     .time { font-size: 30px; font-weight: 400; margin-bottom: 6px; }
     .timing .title { font-size: 20px; font-weight: 500; }
@@ -910,36 +898,28 @@
   </div>
 </section>
 
-<!-- ===== ТАЙМИНГ ===== -->
+<!-- ===== ТАЙМИНГ (иконки Font Awesome) ===== -->
 <section class="timing">
   <h2 class="fade-in-scroll">ТАЙМИНГ ДНЯ</h2>
   <div class="sub fade-in-scroll">Timing</div>
   <div class="timeline">
     <div class="item fade-in-scroll">
-      <div class="icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      </div>
+      <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
       <div class="time">14:00</div>
       <div class="title">Сбор гостей</div>
     </div>
     <div class="item fade-in-scroll">
-      <div class="icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4"/></svg>
-      </div>
+      <div class="icon"><i class="fas fa-ring"></i></div>
       <div class="time">15:00</div>
       <div class="title">Церемония</div>
     </div>
     <div class="item fade-in-scroll">
-      <div class="icon">
-        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h12M4 17h8"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg>
-      </div>
+      <div class="icon"><i class="fas fa-utensils"></i></div>
       <div class="time">16:00</div>
       <div class="title">Банкет</div>
     </div>
     <div class="item fade-in-scroll">
-      <div class="icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-      </div>
+      <div class="icon"><i class="fas fa-music"></i></div>
       <div class="time">21:00</div>
       <div class="title">Финал</div>
     </div>
@@ -1030,7 +1010,6 @@
       </div>
 
       <button type="submit" id="submitBtn">Отправить</button>
-      <!-- НОВОЕ СООБЩЕНИЕ ПОД КНОПКОЙ -->
       <div id="formMessage" class="form-message"></div>
     </form>
   </div>
@@ -1157,10 +1136,9 @@
   }, observerOptions);
   document.querySelectorAll('.fade-in-scroll').forEach(el => observer.observe(el));
 
-  // ===== ОТПРАВКА ФОРМЫ (НОВОЕ СООБЩЕНИЕ БЕЗ ТОСТА) =====
+  // ===== ОТПРАВКА ФОРМЫ =====
   const rsvpForm = document.getElementById('rsvpForm');
   const formMessage = document.getElementById('formMessage');
-  const submitBtn = document.getElementById('submitBtn');
   const FORM_ENDPOINT = 'https://formspree.io/f/xqpzpkge';
 
   rsvpForm.addEventListener('submit', function(e) {
@@ -1176,7 +1154,6 @@
       return;
     }
 
-    // Собираем данные
     const attendanceRadios = document.querySelectorAll('input[name="attend"]');
     let attendance = '';
     for (let radio of attendanceRadios) {
@@ -1193,18 +1170,15 @@
     formData.append('attendance', attendanceLabel);
     formData.append('alcohol', alcoholString);
 
-    // Отправка
     fetch(FORM_ENDPOINT, {
       method: 'POST',
       body: formData,
       mode: 'no-cors'
     })
     .then(() => {
-      // Успех – показываем бежевое сообщение под кнопкой
       formMessage.className = 'form-message show';
       formMessage.textContent = 'Спасибо! Ваш ответ отправлен.';
       rsvpForm.reset();
-      // Скрываем через 5 секунд
       setTimeout(() => {
         formMessage.classList.remove('show');
       }, 5000);
