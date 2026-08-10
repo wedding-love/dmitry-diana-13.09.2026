@@ -84,7 +84,7 @@
     }
     .names {
       position: absolute;
-      bottom: 6%;  /* опустили ещё ниже */
+      bottom: 6%;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -498,7 +498,7 @@
       display: flex;
       justify-content: center;
       gap: 40px;
-      margin-bottom: 10px;  /* уменьшили отступ снизу, чтобы цифры опустились */
+      margin-bottom: 10px;
       flex-wrap: wrap;
       align-self: flex-end;
     }
@@ -518,6 +518,8 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 300;
+      display: block;
+      margin-top: 4px;
     }
 
     /* ===== RSVP (АНКЕТА ГОСТЯ) ===== */
@@ -951,12 +953,24 @@
 <section class="wedding-block">
   <div class="overlay"></div>
   <div class="content">
-    <h1 class="fade-in-scroll">ДО НАШЕЙ СВАДЬБЫ ОСТАЛОСЬ:</h1>
+    <h1 class="fade-in-scroll">ДО НАШЕЙ СВАДЬБЫ</h1>
     <div class="timer">
-      <div><span id="weddingDays">0</span><small>ДНЕЙ</small></div>
-      <div><span id="weddingHours">0</span><small>ЧАСОВ</small></div>
-      <div><span id="weddingMinutes">0</span><small>МИНУТ</small></div>
-      <div><span id="weddingSeconds">0</span><small>СЕКУНД</small></div>
+      <div>
+        <span id="weddingDays">0</span>
+        <small id="daysLabel">дней</small>
+      </div>
+      <div>
+        <span id="weddingHours">0</span>
+        <small id="hoursLabel">часов</small>
+      </div>
+      <div>
+        <span id="weddingMinutes">0</span>
+        <small id="minutesLabel">минут</small>
+      </div>
+      <div>
+        <span id="weddingSeconds">0</span>
+        <small id="secondsLabel">секунд</small>
+      </div>
     </div>
   </div>
 </section>
@@ -1040,6 +1054,16 @@
   updateButtonIcon();
   audio.addEventListener('ended', () => { if (audio.loop) audio.play(); });
 
+  // ===== ФУНКЦИЯ СКЛОНЕНИЯ =====
+  function declension(number, one, two, five) {
+    const n = Math.abs(number) % 100;
+    const n1 = n % 10;
+    if (n > 10 && n < 20) return five;
+    if (n1 > 1 && n1 < 5) return two;
+    if (n1 === 1) return one;
+    return five;
+  }
+
   // ===== ТАЙМЕР =====
   const weddingDate = new Date('2026-09-13T00:00:00').getTime();
   function updateWeddingTimer() {
@@ -1050,16 +1074,26 @@
       document.getElementById('weddingHours').innerText = '0';
       document.getElementById('weddingMinutes').innerText = '0';
       document.getElementById('weddingSeconds').innerText = '0';
+      document.getElementById('daysLabel').innerText = 'дней';
+      document.getElementById('hoursLabel').innerText = 'часов';
+      document.getElementById('minutesLabel').innerText = 'минут';
+      document.getElementById('secondsLabel').innerText = 'секунд';
       return;
     }
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((diff / (1000 * 60)) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
+
     document.getElementById('weddingDays').innerText = days;
     document.getElementById('weddingHours').innerText = String(hours).padStart(2, '0');
     document.getElementById('weddingMinutes').innerText = String(minutes).padStart(2, '0');
     document.getElementById('weddingSeconds').innerText = String(seconds).padStart(2, '0');
+
+    document.getElementById('daysLabel').innerText = declension(days, 'день', 'дня', 'дней');
+    document.getElementById('hoursLabel').innerText = declension(hours, 'час', 'часа', 'часов');
+    document.getElementById('minutesLabel').innerText = declension(minutes, 'минута', 'минуты', 'минут');
+    document.getElementById('secondsLabel').innerText = declension(seconds, 'секунда', 'секунды', 'секунд');
   }
   setInterval(updateWeddingTimer, 1000);
   updateWeddingTimer();
