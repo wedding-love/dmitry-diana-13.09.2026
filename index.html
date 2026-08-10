@@ -84,7 +84,7 @@
     }
     .names {
       position: absolute;
-      bottom: 16%;
+      bottom: 12%;  /* опустили ещё ниже */
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -459,8 +459,8 @@
     /* ===== ТАЙМЕР ===== */
     .wedding-block {
       position: relative;
-      height: 85vh;
-      min-height: 500px;
+      height: 92vh;          /* сделали выше */
+      min-height: 550px;
       background: url('photo_2026-08-07_17-28-00%20-%20Полина.jpg') center/cover no-repeat;
       color: white;
       display: flex;
@@ -487,7 +487,7 @@
     }
     .wedding-block h1 {
       margin-top: 60px;
-      font-size: clamp(32px, 7vw, 48px);
+      font-size: clamp(36px, 7vw, 52px);
       letter-spacing: 2px;
       font-weight: 400;
     }
@@ -495,8 +495,8 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      gap: 30px;
-      margin-bottom: 20px;
+      gap: 40px;
+      margin-bottom: 30px;
       flex-wrap: wrap;
       align-self: flex-end;
     }
@@ -506,13 +506,13 @@
       padding: 0;
     }
     .wedding-block .timer span {
-      font-size: 50px;
+      font-size: 64px;       /* увеличенный размер */
       font-weight: 400;
       display: block;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     }
     .wedding-block .timer small {
-      font-size: 13px;
+      font-size: 14px;
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 300;
@@ -546,13 +546,11 @@
     .rsvp label {
       display: block;
       font-size: 16px;
-      margin: 18px 0 8px;
+      margin: 22px 0 8px;
       font-weight: 500;
       color: #fff;
     }
-    .rsvp input[type="text"],
-    .rsvp input[type="url"],
-    .rsvp input[type="file"] {
+    .rsvp input[type="text"] {
       width: 100%;
       border: none;
       border-bottom: 1px solid rgba(255,255,255,0.7);
@@ -563,26 +561,6 @@
       font-size: 16px;
     }
     .rsvp input::placeholder { color: rgba(255,255,255,0.6); }
-    .rsvp input[type="file"] {
-      border: 1px dashed rgba(255,255,255,0.5);
-      border-radius: 8px;
-      padding: 12px;
-      cursor: pointer;
-      background: rgba(255,255,255,0.05);
-    }
-    .rsvp input[type="file"]::file-selector-button {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: #fff;
-      padding: 6px 14px;
-      border-radius: 20px;
-      margin-right: 12px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    .rsvp input[type="file"]::file-selector-button:hover {
-      background: rgba(255,255,255,0.3);
-    }
 
     /* Кастомные радио-кнопки */
     .rsvp .custom-radio {
@@ -778,8 +756,8 @@
     @media (max-width: 680px) {
       .frame img { width: 100%; height: auto; max-width: 400px; }
       .slide img { height: 300px; }
-      .wedding-block .timer span { font-size: 38px; }
-      .wedding-block .timer { gap: 15px; }
+      .wedding-block .timer span { font-size: 48px; }
+      .wedding-block .timer { gap: 20px; }
       .polaroid-card img { width: 130px; height: 130px; }
       .contacts-block h2 { font-size: 38px; }
       .names-sign { font-size: 34px; }
@@ -793,14 +771,14 @@
     }
     @media (max-width: 480px) {
       .frame img { max-width: 300px; }
-      .wedding-block .timer span { font-size: 28px; }
-      .wedding-block .timer { gap: 10px; }
+      .wedding-block .timer span { font-size: 36px; }
+      .wedding-block .timer { gap: 12px; }
       .wedding-block h1 { font-size: 22px; margin-top: 40px; }
       .slider-section { padding: 20px 15px; }
       .heart-number { width: 34px; height: 34px; }
       .heart-number i { font-size: 34px; }
       .heart-number span { font-size: 16px; }
-      .names { font-size: 40px; bottom: 20%; }
+      .names { font-size: 40px; bottom: 15%; }
     }
   </style>
 </head>
@@ -846,17 +824,22 @@
   <div class="month fade-in-scroll">— СЕНТЯБРЬ 2026 —</div>
   <div class="weekdays fade-in-scroll"><span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span>СБ</span><span>ВС</span></div>
   <div class="days fade-in-scroll">
-    <span></span><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-    <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+    <!-- 1 сентября - вторник, значит первый ряд: пусто, 1,2,3,4,5,6 -->
+    <span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+    <!-- второй ряд: 7,8,9,10,11,12,13 (сердечко) -->
+    <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
     <span>
       <div class="heart-number">
         <i class="fas fa-heart"></i>
         <span>13</span>
       </div>
     </span>
+    <!-- третий ряд: 14-20 -->
     <span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span>
+    <!-- четвертый ряд: 21-27 -->
     <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span>
-    <span>28</span><span>29</span><span>30</span>
+    <!-- пятый ряд: 28,29,30 и пустые до конца недели (воскресенье) -->
+    <span>28</span><span>29</span><span>30</span><span></span><span></span><span></span><span></span>
   </div>
   <div class="calendar-date fade-in-scroll">13.09.2026</div>
   <p class="footer-text fade-in-scroll">Мы будем безумно рады видеть вас в кругу наших гостей</p>
@@ -959,22 +942,14 @@
   </div>
 </section>
 
-<!-- ===== RSVP (АНКЕТА ГОСТЯ) с ссылкой и предустановленным фото ===== -->
+<!-- ===== RSVP (АНКЕТА ГОСТЯ) без ссылки и фото ===== -->
 <section class="rsvp">
   <div class="container">
     <h2 class="fade-in-scroll">АНКЕТА ГОСТЯ</h2>
     <p class="note fade-in-scroll">пожалуйста, подтвердите свое присутствие до 25.08.2026</p>
-    <form id="rsvpForm" class="fade-in-scroll" enctype="multipart/form-data">
+    <form id="rsvpForm" class="fade-in-scroll">
       <label>Ваше имя и фамилия</label>
       <input type="text" name="name" placeholder="Имя и фамилия" required>
-
-      <label>Ссылка с описанием</label>
-      <input type="url" name="link" placeholder="https://example.com">
-      <input type="text" name="link_description" placeholder="Краткое описание ссылки" style="margin-top:6px;">
-
-      <label>Загрузите фото (необязательно)</label>
-      <input type="file" name="photo" accept="image/*" id="photoInput">
-      <input type="hidden" name="default_photo" value="photo_2026-08-07_17-28-00 - Полина.jpg">
 
       <label>Сможете ли Вы присутствовать?</label>
       <div class="radio-group">
@@ -1126,7 +1101,7 @@
     observer.observe(el);
   });
 
-  // ===== ОТПРАВКА ФОРМЫ RSVP (с файлом и скрытым полем с фото) =====
+  // ===== ОТПРАВКА ФОРМЫ RSVP (упрощённая) =====
   const rsvpForm = document.getElementById('rsvpForm');
   const successMessage = document.getElementById('successMessage');
 
@@ -1134,28 +1109,24 @@
     e.preventDefault();
 
     const formData = new FormData(rsvpForm);
-    
-    // Если пользователь не выбрал фото, используем значение из скрытого поля
-    const photoInput = document.getElementById('photoInput');
-    if (photoInput.files.length === 0) {
-      const defaultPhoto = document.querySelector('input[name="default_photo"]').value;
-      if (defaultPhoto) {
-        // Пытаемся загрузить фото по ссылке и прикрепить к форме
-        try {
-          const response = await fetch(defaultPhoto);
-          const blob = await response.blob();
-          const file = new File([blob], defaultPhoto, { type: blob.type });
-          formData.append('photo', file);
-        } catch (err) {
-          console.log('Не удалось загрузить фото по умолчанию:', err);
-        }
+    const data = {};
+    for (let [key, value] of formData.entries()) {
+      if (key === 'alcohol[]') {
+        if (!data.alcohol) data.alcohol = [];
+        data.alcohol.push(value);
+      } else {
+        data[key] = value;
       }
     }
 
     try {
       const response = await fetch('https://formspree.io/f/xgawvjny', {
         method: 'POST',
-        body: formData
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
       });
 
       if (response.ok) {
