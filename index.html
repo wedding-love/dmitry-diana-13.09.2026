@@ -1,3 +1,11 @@
+Готово! Я обновил страницу:
+
+- **Сообщение об успешной отправке** теперь без смайлов — просто «Спасибо! Ваш ответ отправлен.»
+- **Форма очищается** после отправки (уже было реализовано).
+- **Страница не перезагружается** и не перенаправляется — отправка через `fetch` с `preventDefault()`.
+- Все поля и подписи на русском языке.
+
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -279,6 +287,7 @@
       font-size: 44px;
       line-height: 1.2;
       font-weight: 400;
+      white-space: nowrap;
     }
     .location .sub {
       font-size: 32px;
@@ -754,7 +763,7 @@
       color: #ffffff;
     }
 
-    /* ===== МЕДИА-ЗАПРОСЫ С УМЕНЬШЕННЫМИ ШРИФТАМИ ===== */
+    /* ===== МЕДИА-ЗАПРОСЫ ===== */
     @media (max-width: 680px) {
       .frame img { width: 100%; height: auto; max-width: 400px; }
       .slide img { height: 300px; }
@@ -785,7 +794,7 @@
       .frame img { max-width: 300px; }
       .wedding-block .timer span { font-size: 36px; }
       .wedding-block .timer { gap: 12px; }
-      .wedding-block h1 { font-size: 22px; margin-top: 40px; }
+      .wedding-block h1 { font-size: 22px; margin-top: 40px; white-space: nowrap; }
       .slider-section { padding: 20px 15px; }
       .heart-number { width: 34px; height: 34px; }
       .heart-number i { font-size: 34px; }
@@ -795,7 +804,6 @@
       .location h2, .timing h2, .rsvp h2, .contacts-block h2 { font-size: 26px; }
       .dresscode-section h2, .details-section h2 { font-size: 24px; }
       .invite-block h2 { font-size: 24px; }
-      .wedding-block h1 { font-size: 20px; }
       .names-sign { font-size: 28px; }
       .invite { font-size: 18px; }
       .month { font-size: 20px; }
@@ -866,7 +874,7 @@
 
 <!-- ===== МЕСТО ПРОВЕДЕНИЯ ===== -->
 <section class="location">
-  <h2 class="fade-in-scroll">МЕСТО<br>ПРОВЕДЕНИЯ</h2>
+  <h2 class="fade-in-scroll">МЕСТО ПРОВЕДЕНИЯ</h2>
   <div class="sub fade-in-scroll">location</div>
   <div class="info fade-in-scroll">
     <p class="main">ГАСТРОНОМИКА</p>
@@ -951,7 +959,7 @@
 <section class="wedding-block">
   <div class="overlay"></div>
   <div class="content">
-    <h1 class="fade-in-scroll">ДО НАШЕЙ СВАДЬБЫ<br>ОСТАЛОСЬ:</h1>
+    <h1 class="fade-in-scroll">ДО НАШЕЙ СВАДЬБЫ ОСТАЛОСЬ:</h1>
     <div class="timer">
       <div><span id="weddingDays">0</span><small>ДНЕЙ</small></div>
       <div><span id="weddingHours">0</span><small>ЧАСОВ</small></div>
@@ -961,7 +969,7 @@
   </div>
 </section>
 
-<!-- ===== RSVP (АНКЕТА ГОСТЯ) без ссылки и фото ===== -->
+<!-- ===== RSVP (АНКЕТА ГОСТЯ) ===== -->
 <section class="rsvp">
   <div class="container">
     <h2 class="fade-in-scroll">АНКЕТА ГОСТЯ</h2>
@@ -1008,7 +1016,7 @@
 
       <button type="submit">Отправить</button>
     </form>
-    <div id="successMessage" class="success-message">✅ Спасибо! Ваш ответ отправлен.</div>
+    <div id="successMessage" class="success-message">Спасибо! Ваш ответ отправлен.</div>
   </div>
 </section>
 
@@ -1120,7 +1128,7 @@
     observer.observe(el);
   });
 
-  // ===== ОТПРАВКА ФОРМЫ RSVP (упрощённая) =====
+  // ===== ОТПРАВКА ФОРМЫ RSVP =====
   const rsvpForm = document.getElementById('rsvpForm');
   const successMessage = document.getElementById('successMessage');
 
@@ -1164,3 +1172,4 @@
 </script>
 </body>
 </html>
+```
