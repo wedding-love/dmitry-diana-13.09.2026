@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <style>
+    /* все стили без изменений — они уже были в предыдущем ответе */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
@@ -1021,7 +1022,7 @@
   </div>
 </section>
 
-<!-- ===== RSVP (с вопросом про +1) ===== -->
+<!-- ===== RSVP (С ВОПРОСОМ ПРО +1, ВСЕ ПОЛЯ ПУСТЫЕ) ===== -->
 <section class="rsvp">
   <div class="container">
     <h2 class="fade-in-scroll">АНКЕТА ГОСТЯ</h2>
@@ -1042,7 +1043,7 @@
         </label>
       </div>
 
-      <!-- НОВЫЙ ВОПРОС: БУДЕТ ЛИ ГОСТЬ (+1) -->
+      <!-- ВОПРОС ПРО +1 (БЕЗ ВЫБРАННОГО ПО УМОЛЧАНИЮ) -->
       <label>Будет ли с вами гость (+1)?</label>
       <div class="radio-group">
         <label class="custom-radio">
@@ -1050,7 +1051,7 @@
           <span class="radio-mark"></span> Да
         </label>
         <label class="custom-radio">
-          <input type="radio" name="has_guest" value="Нет" checked>
+          <input type="radio" name="has_guest" value="Нет">
           <span class="radio-mark"></span> Нет
         </label>
       </div>
@@ -1211,7 +1212,7 @@
     radio.addEventListener('change', toggleGuestBlock);
   });
 
-  // Инициализация при загрузке
+  // Инициализация при загрузке (поля скрыты, т.к. нет выбранной радио-кнопки)
   toggleGuestBlock();
 
   // ===== ОТПРАВКА ФОРМЫ =====
@@ -1232,13 +1233,18 @@
       return;
     }
 
-    // Присутствие
+    // Проверка: выбран ли ответ на вопрос "Сможете ли Вы присутствовать?"
     const attendanceRadios = document.querySelectorAll('input[name="attend"]');
     let attendance = '';
     for (let radio of attendanceRadios) {
       if (radio.checked) { attendance = radio.value; break; }
     }
-    const attendanceLabel = attendance || 'Не указано';
+    if (attendance === '') {
+      formMessage.className = 'form-message show error';
+      formMessage.textContent = 'Пожалуйста, выберите, сможете ли вы присутствовать.';
+      return;
+    }
+    const attendanceLabel = attendance;
 
     // +1
     const hasGuestRadiosChecked = document.querySelectorAll('input[name="has_guest"]');
@@ -1256,7 +1262,7 @@
     const formData = new FormData();
     formData.append('name', name);
     formData.append('attendance', attendanceLabel);
-    formData.append('has_guest', hasGuest);
+    formData.append('has_guest', hasGuest || 'Не указано');
     if (guestName) {
       formData.append('guest_name', guestName);
     }
