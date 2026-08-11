@@ -77,7 +77,7 @@
     }
     .names {
       position: absolute;
-      bottom: 12%;  /* ← ПОДНЯЛ ВЫШЕ (было 6%) */
+      bottom: 12%;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -662,6 +662,17 @@
       margin: 0;
     }
 
+    /* ---- СКРЫВАЕМЫЙ БЛОК (для +1) ---- */
+    .sub-block {
+      margin-top: 10px;
+      padding-left: 10px;
+      border-left: 2px solid rgba(255,255,255,0.4);
+      display: none;
+    }
+    .sub-block.active {
+      display: block;
+    }
+
     .rsvp button {
       width: 100%;
       margin-top: 40px;
@@ -1010,6 +1021,7 @@
   </div>
 </section>
 
+<!-- ===== RSVP (с вопросом про +1) ===== -->
 <section class="rsvp">
   <div class="container">
     <h2 class="fade-in-scroll">АНКЕТА ГОСТЯ</h2>
@@ -1028,6 +1040,25 @@
           <input type="radio" name="attend" value="Нет, не смогу">
           <span class="radio-mark"></span> Нет, не смогу
         </label>
+      </div>
+
+      <!-- НОВЫЙ ВОПРОС: БУДЕТ ЛИ ГОСТЬ (+1) -->
+      <label>Будет ли с вами гость (+1)?</label>
+      <div class="radio-group">
+        <label class="custom-radio">
+          <input type="radio" name="has_guest" value="Да">
+          <span class="radio-mark"></span> Да
+        </label>
+        <label class="custom-radio">
+          <input type="radio" name="has_guest" value="Нет" checked>
+          <span class="radio-mark"></span> Нет
+        </label>
+      </div>
+
+      <!-- Скрываемое поле для имени гостя -->
+      <div class="sub-block" id="guestNameBlock">
+        <label style="margin-top: 6px;">Имя и фамилия гостя</label>
+        <input type="text" name="guest_name" id="guestNameInput" placeholder="Имя и фамилия гостя">
       </div>
 
       <label>Предпочтения по алкоголю (можно выбрать несколько)</label>
@@ -1163,6 +1194,26 @@
   }, observerOptions);
   document.querySelectorAll('.fade-in-scroll').forEach(el => observer.observe(el));
 
+  // ===== ПОКАЗ / СКРЫТИЕ ПОЛЯ ДЛЯ ГОСТЯ =====
+  const hasGuestRadios = document.querySelectorAll('input[name="has_guest"]');
+  const guestNameBlock = document.getElementById('guestNameBlock');
+
+  function toggleGuestBlock() {
+    const selected = document.querySelector('input[name="has_guest"]:checked');
+    if (selected && selected.value === 'Да') {
+      guestNameBlock.classList.add('active');
+    } else {
+      guestNameBlock.classList.remove('active');
+    }
+  }
+
+  hasGuestRadios.forEach(radio => {
+    radio.addEventListener('change', toggleGuestBlock);
+  });
+
+  // Инициализация при загрузке
+  toggleGuestBlock();
+
   // ===== ОТПРАВКА ФОРМЫ =====
   const rsvpForm = document.getElementById('rsvpForm');
   const formMessage = document.getElementById('formMessage');
@@ -1181,6 +1232,7 @@
       return;
     }
 
+    // Присутствие
     const attendanceRadios = document.querySelectorAll('input[name="attend"]');
     let attendance = '';
     for (let radio of attendanceRadios) {
@@ -1188,6 +1240,15 @@
     }
     const attendanceLabel = attendance || 'Не указано';
 
+    // +1
+    const hasGuestRadiosChecked = document.querySelectorAll('input[name="has_guest"]');
+    let hasGuest = '';
+    for (let radio of hasGuestRadiosChecked) {
+      if (radio.checked) { hasGuest = radio.value; break; }
+    }
+    const guestName = document.getElementById('guestNameInput').value.trim();
+
+    // Алкоголь
     const alcoholCheckboxes = document.querySelectorAll('input[name="alcohol[]"]:checked');
     const alcoholValues = Array.from(alcoholCheckboxes).map(cb => cb.value);
     const alcoholString = alcoholValues.length ? alcoholValues.join(', ') : 'Не выбрано';
@@ -1195,6 +1256,10 @@
     const formData = new FormData();
     formData.append('name', name);
     formData.append('attendance', attendanceLabel);
+    formData.append('has_guest', hasGuest);
+    if (guestName) {
+      formData.append('guest_name', guestName);
+    }
     formData.append('alcohol', alcoholString);
 
     fetch(FORM_ENDPOINT, {
@@ -1206,6 +1271,8 @@
       formMessage.className = 'form-message show';
       formMessage.textContent = 'Спасибо! Ваш ответ отправлен.';
       rsvpForm.reset();
+      // после сброса снова скрыть блок гостя
+      toggleGuestBlock();
       setTimeout(() => {
         formMessage.classList.remove('show');
       }, 5000);
